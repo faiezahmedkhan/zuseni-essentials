@@ -29,6 +29,80 @@
     </div>
   </section>
 
+  <!-- THE ZUSENI RITUAL -->
+  <section class="ritual-section container">
+    <div class="text-center" style="margin-bottom: 50px;">
+      <h2 class="script-font">The Zuseni Ritual</h2>
+      <p style="color: var(--text-muted); font-size: 1.1rem;">Three steps to radiant, botanical beauty.</p>
+    </div>
+    <div class="ritual-grid">
+      <div class="ritual-step fade-in-up">
+        <div class="step-number">01</div>
+        <h3>Cleanse</h3>
+        <p>Wash away impurities with gentle, foaming botanicals.</p>
+      </div>
+      <div class="ritual-step fade-in-up delay-1">
+        <div class="step-number">02</div>
+        <h3>Treat</h3>
+        <p>Target your unique skin needs with our potent organic serums.</p>
+      </div>
+      <div class="ritual-step fade-in-up delay-2">
+        <div class="step-number">03</div>
+        <h3>Hydrate</h3>
+        <p>Lock in moisture and protect your skin barrier with rich creams.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BESTSELLERS SECTION -->
+  <section class="bestsellers-section container">
+    <div class="text-center" style="margin-bottom: 50px;">
+      <h2 class="script-font">Customer Favorites</h2>
+      <p style="color: var(--text-muted); font-size: 1.1rem;">The rituals our community loves most.</p>
+    </div>
+    
+    <div class="bestsellers-grid">
+      <div class="product-card" *ngFor="let product of bestsellers" [routerLink]="['/product', product.id]">
+        <div class="card-img">
+          <img [src]="product.image" [alt]="product.name">
+          <div class="card-overlay">
+            <button class="btn-primary quick-add" (click)="addToCart(product, $event)">Quick Add</button>
+          </div>
+        </div>
+        <div class="card-info">
+          <p class="category">{{ product.category | uppercase }}</p>
+          <h3 class="name">{{ product.name }}</h3>
+          <p class="price">${{ product.price.toFixed(2) }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INGREDIENTS SPOTLIGHT SECTION -->
+  <section class="ingredients-spotlight">
+    <!-- Dynamic Background -->
+    <div class="spotlight-bg" *ngFor="let item of ingredients; let i = index" 
+         [class.active]="i === activeIngredientIndex"
+         [style.background-image]="'url(' + item.bgImage + ')'">
+    </div>
+    <div class="spotlight-overlay"></div>
+
+    <div class="spotlight-content container">
+      <div class="spotlight-text fade-in-up">
+        <h2 class="script-font" style="color: var(--gold-light);">The Purest Elements</h2>
+        <p class="spotlight-desc">{{ ingredients[activeIngredientIndex].description }}</p>
+        
+        <ul class="ingredients-nav">
+          <li *ngFor="let item of ingredients; let i = index"
+              [class.active]="i === activeIngredientIndex"
+              (mouseenter)="setIngredient(i)">
+            {{ item.name }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <!-- PRODUCTS SECTION (Split View) -->
   <section class="products-section container">
     <div class="products-layout">
@@ -60,6 +134,21 @@
             <img [src]="getActiveImages()[0]" alt="Product Tertiary">
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section class="testimonials-section container">
+    <div class="text-center" style="margin-bottom: 50px;">
+      <h2 class="script-font">Voices of Radiance</h2>
+      <p style="color: var(--text-muted); font-size: 1.1rem;">What our community is saying.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-in-up" *ngFor="let t of testimonials">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"{{ t.quote }}"</p>
+        <p class="author">&mdash; {{ t.author }}</p>
       </div>
     </div>
   </section>
@@ -107,6 +196,19 @@
               [class.active]="i === currentGalleryIndex"
               (click)="currentGalleryIndex = i"></span>
       </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER SECTION -->
+  <section class="newsletter-section">
+    <div class="newsletter-overlay"></div>
+    <div class="newsletter-content container text-center fade-in-up">
+      <h2 class="script-font">Join the Inner Circle</h2>
+      <p>Subscribe to receive 15% off your first ritual and early access to new botanical blends.</p>
+      <form class="newsletter-form" (submit)="$event.preventDefault()">
+        <input type="email" placeholder="Your email address" required>
+        <button type="submit" class="btn-primary">Subscribe</button>
+      </form>
     </div>
   </section>
 

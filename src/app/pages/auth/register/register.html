@@ -1,0 +1,47 @@
+<div class="auth-layout fade-in-up">
+  <div class="auth-image">
+    <div class="auth-overlay">
+      <h2 class="script-font">Join Us</h2>
+      <p>Discover the pure essence of botanical care.</p>
+    </div>
+  </div>
+  
+  <div class="auth-form-container">
+    <div class="auth-form-wrapper">
+      <h1 class="script-font form-title">Create Account</h1>
+      <p class="form-subtitle">Sign up to start your organic journey.</p>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="auth-form">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" formControlName="name" placeholder="Jane Doe">
+          <span class="error-msg" *ngIf="registerForm.get('name')?.touched && registerForm.get('name')?.invalid">
+            Name is required.
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" formControlName="email" placeholder="you@example.com">
+          <span class="error-msg" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
+            Please enter a valid email.
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" formControlName="password" placeholder="••••••••">
+          <span class="error-msg" *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
+            Password must be at least 6 characters.
+          </span>
+        </div>
+
+        <button type="submit" class="btn-primary auth-submit" [disabled]="registerForm.invalid">Sign Up</button>
+      </form>
+
+      <div class="auth-footer">
+        <p>Already have an account? <a routerLink="/login" class="auth-link">Sign In</a></p>
+      </div>
+    </div>
+  </div>
+</div>

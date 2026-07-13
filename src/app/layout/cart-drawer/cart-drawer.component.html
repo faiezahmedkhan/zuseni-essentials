@@ -51,7 +51,7 @@
       <span class="subtotal-price">${{ cartService.subtotal().toFixed(2) }}</span>
     </div>
     <p class="shipping-note">Shipping & taxes calculated at checkout.</p>
-    <button class="btn-primary checkout-btn" (click)="closeDrawer()">Checkout</button>
+    <button class="btn-primary checkout-btn" (click)="closeDrawer()" routerLink="/checkout">Checkout</button>
   </div>
 
 </div>

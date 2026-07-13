@@ -4,10 +4,22 @@
   </div>
   
   <div class="header-main container">
-    <nav class="nav-left">
-      <a routerLink="/shop" class="nav-link">Shop</a>
-      <a routerLink="/" class="nav-link">About Us</a>
-      <a routerLink="/" class="nav-link">Journal</a>
+    <button class="mobile-menu-btn" aria-label="Menu" (click)="toggleMobileMenu()" [style.opacity]="isMobileMenuOpen ? '0' : '1'">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+    
+    <nav class="nav-left" [class.menu-open]="isMobileMenuOpen">
+      <!-- Close Button (Top Right) -->
+      <button class="close-menu-btn" aria-label="Close Menu" (click)="closeMobileMenu()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <!-- Logo inside the mobile menu -->
+      <div class="mobile-menu-logo" *ngIf="isMobileMenuOpen">
+        <span class="script-font">Zuseni Essentials</span>
+      </div>
+      <a routerLink="/shop" class="nav-link" (click)="closeMobileMenu()">Shop</a>
+      <a routerLink="/" class="nav-link" (click)="closeMobileMenu()">About Us</a>
+      <a routerLink="/" class="nav-link" (click)="closeMobileMenu()">Journal</a>
     </nav>
     
     <div class="logo">
@@ -15,12 +27,24 @@
     </div>
     
     <div class="nav-right">
-      <button class="icon-btn" aria-label="Search">
+      <button class="icon-btn" aria-label="Search" (click)="openSearch()">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
       </button>
-      <button class="icon-btn" aria-label="Account">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <!-- Account Icon (Logged In) -->
+      <div class="account-menu" *ngIf="authService.currentUser() as user">
+        <span class="user-name">Hi, {{ user.name.split(' ')[0] }}</span>
+        <button class="logout-btn" (click)="authService.logout()">Logout</button>
+      </div>
+
+      <!-- Account Icon (Logged Out) -->
+      <button *ngIf="!authService.currentUser()" class="icon-btn" aria-label="Account" routerLink="/login">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
       </button>
+
+      <!-- Cart Button -->
       <button class="icon-btn cart-btn" aria-label="Cart" (click)="cartService.toggleCart()">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
         <span class="cart-count" *ngIf="cartService.totalItems() > 0">{{ cartService.totalItems() }}</span>
@@ -28,3 +52,33 @@
     </div>
   </div>
 </header>
+
+<!-- FULL SCREEN SEARCH OVERLAY -->
+<div class="search-overlay" *ngIf="isSearchOpen" (click)="closeSearch()">
+  <button class="close-search-btn" (click)="closeSearch()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+  </button>
+  
+  <div class="search-container" (click)="$event.stopPropagation()">
+    <input type="text" 
+           class="search-input script-font" 
+           placeholder="Search for pure botanicals..." 
+           [(ngModel)]="searchQuery" 
+           (input)="onSearchInput()"
+           autofocus>
+           
+    <div class="search-results fade-in-up" *ngIf="searchResults.length > 0">
+      <div class="search-result-item" *ngFor="let p of searchResults" [routerLink]="['/product', p.id]" (click)="closeSearch()">
+        <img [src]="p.image" [alt]="p.name">
+        <div class="result-info">
+          <h4>{{ p.name }}</h4>
+          <p>${{ p.price.toFixed(2) }}</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="search-empty" *ngIf="searchQuery && searchResults.length === 0">
+      <p>No rituals found for "{{ searchQuery }}".</p>
+    </div>
+  </div>
+</div>

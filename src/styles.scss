@@ -188,7 +188,7 @@ a {
 .fade-in-up {
   opacity: 0;
   transform: translateY(30px);
-  animation: fadeInUp 0.8s forwards var(--transition-smooth);
+  animation: fadeInUp 0.8s forwards ease-out;
 }
 
 .delay-1 { animation-delay: 0.2s; }

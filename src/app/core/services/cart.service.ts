@@ -27,6 +27,10 @@ export class CartService {
   closeCart() { this.isCartOpen.set(false); }
   toggleCart() { this.isCartOpen.update(v => !v); }
 
+  clearCart() {
+    this.cartItems.set([]);
+  }
+
   addToCart(product: Product, quantity: number = 1) {
     this.cartItems.update(items => {
       const existing = items.find(i => i.product.id === product.id);

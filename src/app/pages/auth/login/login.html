@@ -1,0 +1,39 @@
+<div class="auth-layout fade-in-up">
+  <div class="auth-image">
+    <div class="auth-overlay">
+      <h2 class="script-font">Welcome Back</h2>
+      <p>Return to your pure, botanical rituals.</p>
+    </div>
+  </div>
+  
+  <div class="auth-form-container">
+    <div class="auth-form-wrapper">
+      <h1 class="script-font form-title">Sign In</h1>
+      <p class="form-subtitle">Enter your details to access your account.</p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="auth-form">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" formControlName="email" placeholder="you@example.com">
+          <span class="error-msg" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
+            Please enter a valid email.
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" formControlName="password" placeholder="••••••••">
+          <span class="error-msg" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+            Password must be at least 6 characters.
+          </span>
+        </div>
+
+        <button type="submit" class="btn-primary auth-submit" [disabled]="loginForm.invalid">Sign In</button>
+      </form>
+
+      <div class="auth-footer">
+        <p>Don't have an account? <a routerLink="/register" class="auth-link">Create one</a></p>
+      </div>
+    </div>
+  </div>
+</div>
