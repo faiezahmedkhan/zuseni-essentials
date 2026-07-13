@@ -1,0 +1,113 @@
+<div class="home-container">
+  
+  <!-- HERO SECTION (Ruhiveda Style) -->
+  <section class="hero ornate-bg">
+    <div class="hero-bg">
+      <img src="/images/zuseni_hero.jpg" alt="Zuseni Essentials Organic Skincare">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content text-center">
+      <h1 class="script-font fade-in-up">Zuseni Essentials</h1>
+      <p class="fade-in-up delay-1">Pure Nature. Pure Tradition. Pure Beauty.</p>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION (Beige Gradient with Floating Card) -->
+  <section class="about-section">
+    <div class="container">
+      <div class="about-card">
+        <div class="about-img">
+          <img src="/images/organic_spa_about.jpg" alt="About Zuseni">
+        </div>
+        <div class="about-text">
+          <h2 class="script-font">About Zuseni Essentials</h2>
+          <p>Nature is the heart of every creation. We deeply believe that the truest care comes from the earth's pure ingredients.</p>
+          <p>Our journey began with a simple vision: to harness the ancient botanical secrets from around the world, while maintaining the highest standard of quality and purity.</p>
+          <p>A blend of modern luxury and pure tradition, our formulations offer the ultimate botanical remedy for radiant wellness every day.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS SECTION (Split View) -->
+  <section class="products-section container">
+    <div class="products-layout">
+      <!-- Left List -->
+      <div class="products-list-wrapper">
+        <h2 class="script-font">Our products</h2>
+        <p class="products-subtext">Discover our curated collection of botanical care. From glowing serums to nourishing hair oils, we have you covered.</p>
+        
+        <ul class="products-list">
+          <li *ngFor="let cat of productCategories" 
+              [class.active]="activeProductCategory === cat.name"
+              (click)="setActiveCategory(cat.name)">
+            {{ cat.name | uppercase }}
+          </li>
+        </ul>
+        <button class="btn-primary" routerLink="/shop" style="margin-top: 30px;">Shop All</button>
+      </div>
+
+      <!-- Right Images -->
+      <div class="products-images">
+        <div class="image-box primary-box">
+          <img [src]="getActiveImages()[0]" alt="Product Primary">
+        </div>
+        <div class="secondary-boxes">
+          <div class="image-box">
+            <img [src]="getActiveImages()[1]" alt="Product Secondary">
+          </div>
+          <div class="image-box">
+            <img [src]="getActiveImages()[0]" alt="Product Tertiary">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GREEN FEATURES SECTION -->
+  <section class="features-section">
+    <div class="container text-center">
+      <h2 class="script-font" style="color: var(--gold-primary); margin-bottom: 40px;">Nature's Best in Every Drop</h2>
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon">🌿</div>
+          <p>100% Organic</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🐰</div>
+          <p>Cruelty Free</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">♻️</div>
+          <p>Eco Packaging</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">✨</div>
+          <p>Small Batches</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY CAROUSEL -->
+  <section class="gallery-carousel-section">
+    <div class="carousel-container">
+      <div class="carousel-track" [style.transform]="'translateX(-' + (currentGalleryIndex * 100) + '%)'">
+        <div class="carousel-slide" *ngFor="let img of galleryImages">
+          <img [src]="img" alt="Gallery Image">
+        </div>
+      </div>
+      
+      <button class="carousel-btn prev-btn" (click)="prevGalleryImage()">&#10094;</button>
+      <button class="carousel-btn next-btn" (click)="nextGalleryImage()">&#10095;</button>
+      
+      <div class="carousel-indicators">
+        <span *ngFor="let img of galleryImages; let i = index" 
+              class="indicator" 
+              [class.active]="i === currentGalleryIndex"
+              (click)="currentGalleryIndex = i"></span>
+      </div>
+    </div>
+  </section>
+
+</div>

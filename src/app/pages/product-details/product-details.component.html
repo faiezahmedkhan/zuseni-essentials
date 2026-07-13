@@ -1,0 +1,75 @@
+<div class="product-page" *ngIf="product">
+  <div class="container product-layout">
+    
+    <!-- Image Gallery -->
+    <div class="product-gallery">
+      <div class="main-image">
+        <img [src]="product.image" [alt]="product.name">
+      </div>
+    </div>
+
+    <!-- Product Info -->
+    <div class="product-details">
+      <nav class="breadcrumb">
+        <a routerLink="/shop">Shop</a> &rsaquo; 
+        <a [routerLink]="['/shop']" [queryParams]="{category: product.category}">{{ product.category }}</a> &rsaquo; 
+        <span>{{ product.name }}</span>
+      </nav>
+
+      <h1 class="product-title">{{ product.name }}</h1>
+      <div class="product-price">${{ product.price.toFixed(2) }}</div>
+      
+      <p class="product-description">{{ product.fullDescription }}</p>
+
+      <div class="add-to-cart-section">
+        <div class="quantity-selector">
+          <button (click)="decrementQuantity()">-</button>
+          <input type="text" [value]="quantity" readonly>
+          <button (click)="incrementQuantity()">+</button>
+        </div>
+        <button class="btn-primary add-btn" (click)="addToCart()">Add to Cart</button>
+      </div>
+
+      <div class="product-meta">
+        <div class="meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          100% Organic & Vegan
+        </div>
+        <div class="meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4l3 3"></path></svg>
+          Handcrafted in Small Batches
+        </div>
+        <div class="meta-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          Eco-Friendly Packaging
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="product-tabs">
+        <div class="tab-headers">
+          <button [class.active]="activeTab === 'ingredients'" (click)="setTab('ingredients')">Key Ingredients</button>
+          <button [class.active]="activeTab === 'benefits'" (click)="setTab('benefits')">Benefits</button>
+          <button [class.active]="activeTab === 'directions'" (click)="setTab('directions')">How to Use</button>
+        </div>
+        
+        <div class="tab-content" *ngIf="activeTab === 'ingredients'">
+          <ul class="check-list">
+            <li *ngFor="let ingredient of product.ingredients">{{ ingredient }}</li>
+          </ul>
+        </div>
+        
+        <div class="tab-content" *ngIf="activeTab === 'benefits'">
+          <ul class="check-list">
+            <li *ngFor="let benefit of product.benefits">{{ benefit }}</li>
+          </ul>
+        </div>
+        
+        <div class="tab-content" *ngIf="activeTab === 'directions'">
+          <p>{{ product.directions }}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

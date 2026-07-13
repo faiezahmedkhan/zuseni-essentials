@@ -1,0 +1,202 @@
+// Include theming for Angular Material with `mat.theme()`.
+@use '@angular/material' as mat;
+
+html {
+  height: 100%;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Damion&family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+  /* Ruhiveda Inspired Color Palette */
+  --brown-primary: #6E3F1B;
+  --brown-deep: #4A2810;
+  --brown-light: #8B5A3C;
+  
+  --green-accent: #3E5A2D;
+  --green-dark: #2A4120;
+  --green-light: #547345;
+  
+  --gold-primary: #D4AF37;
+  --gold-light: #E6C757;
+  --gold-dark: #B8941F;
+  
+  --beige-light: #F8E6C1;
+  --beige-medium: #E8D4A8;
+  --cream: #FFF8F0;
+  
+  --white: #FFFFFF;
+  --black: #000000;
+  
+  --text-main: #333333;
+  --text-muted: #666666;
+
+  /* Typography */
+  --font-script: 'Damion', cursive;
+  --font-body: 'Poppins', sans-serif;
+
+  /* Geometry & Shadows */
+  --radius-sm: 5px;
+  --radius-md: 10px;
+  --radius-lg: 15px;
+  
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.3);
+  
+  /* Transitions */
+  --transition-smooth: all 0.3s ease;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--text-main);
+  background-color: var(--white);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Global Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+  margin-top: 0;
+}
+
+.script-font {
+  font-family: var(--font-script);
+  font-weight: 400;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition-smooth);
+}
+
+/* Base utility classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.text-center { text-align: center; }
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--green-dark);
+  color: var(--white);
+  padding: 10px 30px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.btn-primary:hover {
+  background-color: var(--gold-primary);
+  box-shadow: var(--shadow-gold);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--gold-primary);
+  border: 1px solid var(--gold-primary);
+  padding: 10px 30px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.btn-outline:hover {
+  background-color: var(--gold-primary);
+  color: var(--white);
+}
+
+/* Ornate Corners Decoration (CSS implementation of the screenshot corners) */
+.ornate-bg {
+  position: relative;
+}
+
+.ornate-bg::before,
+.ornate-bg::after {
+  content: '';
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23D4AF37" d="M0,0 L100,0 C100,55 55,100 0,100 Z" opacity="0.3"/><path fill="none" stroke="%23D4AF37" stroke-width="2" d="M10,0 C10,45 45,80 100,90" stroke-dasharray="2 4"/><circle cx="20" cy="20" r="5" fill="%23D4AF37"/><circle cx="40" cy="15" r="3" fill="%23D4AF37"/><circle cx="15" cy="40" r="3" fill="%23D4AF37"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.ornate-bg::before {
+  top: 0;
+  left: 0;
+}
+
+.ornate-bg::after {
+  bottom: 0;
+  right: 0;
+  transform: rotate(180deg);
+}
+
+.ornate-bg-top-right::after {
+  top: 0;
+  right: 0;
+  bottom: auto;
+  left: auto;
+  transform: rotate(90deg);
+}
+
+.ornate-bg-bottom-left::before {
+  bottom: 0;
+  left: 0;
+  top: auto;
+  right: auto;
+  transform: rotate(270deg);
+}
+
+/* Animations */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s forwards var(--transition-smooth);
+}
+
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

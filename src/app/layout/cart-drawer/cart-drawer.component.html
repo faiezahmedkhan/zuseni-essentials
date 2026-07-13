@@ -1,0 +1,57 @@
+<!-- Overlay background -->
+<div class="drawer-overlay" 
+     [class.open]="cartService.isCartOpen()" 
+     (click)="closeDrawer()">
+</div>
+
+<!-- Slide-out Drawer -->
+<div class="cart-drawer" [class.open]="cartService.isCartOpen()">
+  
+  <div class="drawer-header">
+    <h3 class="script-font">Your Cart</h3>
+    <button class="close-btn" (click)="closeDrawer()" aria-label="Close cart">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+  </div>
+
+  <div class="drawer-content">
+    
+    <!-- Empty State -->
+    <div *ngIf="cartService.items().length === 0" class="empty-state">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--gold-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+      <p>Your cart is currently empty.</p>
+      <button class="btn-primary" (click)="closeDrawer()" routerLink="/shop">Shop Now</button>
+    </div>
+
+    <!-- Items -->
+    <div class="drawer-items" *ngIf="cartService.items().length > 0">
+      <div class="drawer-item" *ngFor="let item of cartService.items()">
+        <img [src]="item.product.image" [alt]="item.product.name" class="item-img">
+        
+        <div class="item-info">
+          <a [routerLink]="['/product', item.product.id]" (click)="closeDrawer()" class="item-title">{{ item.product.name }}</a>
+          <div class="item-price">${{ item.product.price.toFixed(2) }}</div>
+          
+          <div class="item-actions">
+            <select [value]="item.quantity" (change)="updateQuantity(item.product.id, $event)" class="qty-select">
+              <option *ngFor="let num of [1,2,3,4,5,6,7,8,9,10]" [value]="num">{{ num }}</option>
+            </select>
+            <button class="remove-btn" (click)="removeItem(item.product.id)">Remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer (Subtotal & Checkout) -->
+  <div class="drawer-footer" *ngIf="cartService.items().length > 0">
+    <div class="subtotal-row">
+      <span>Subtotal</span>
+      <span class="subtotal-price">${{ cartService.subtotal().toFixed(2) }}</span>
+    </div>
+    <p class="shipping-note">Shipping & taxes calculated at checkout.</p>
+    <button class="btn-primary checkout-btn" (click)="closeDrawer()">Checkout</button>
+  </div>
+
+</div>

@@ -1,0 +1,59 @@
+<div class="shop-container">
+  <!-- Shop Header -->
+  <div class="shop-header text-center">
+    <h1>Our Collection</h1>
+    <p>Discover our full range of organic, plant-powered formulas.</p>
+  </div>
+
+  <div class="container shop-layout">
+    
+    <!-- Sidebar Filters -->
+    <aside class="shop-sidebar">
+      <div class="filter-group">
+        <h3>Categories</h3>
+        <ul class="category-list">
+          <li *ngFor="let cat of productService.categories()" 
+              [class.active]="activeCategory === cat"
+              (click)="setCategory(cat)">
+            {{ cat }}
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Product Grid Area -->
+    <main class="shop-main">
+      <div class="shop-toolbar">
+        <p class="results-count">Showing {{ products.length }} results</p>
+        <div class="sort-dropdown">
+          <select (change)="setSortOrder($event)">
+            <option value="featured">Sort by: Featured</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="product-grid">
+        <a [routerLink]="['/product', prod.id]" class="product-card" *ngFor="let prod of products">
+          <div class="product-img">
+            <img [src]="prod.image" [alt]="prod.name">
+            <div class="product-actions">
+              <button class="btn-quick-add" (click)="addToCart(prod, $event)">Quick Add</button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-category">{{ prod.category }}</span>
+            <h4>{{ prod.name }}</h4>
+            <div class="product-price">${{ prod.price.toFixed(2) }}</div>
+          </div>
+        </a>
+      </div>
+      
+      <div *ngIf="products.length === 0" class="no-results">
+        <p>No products found in this category.</p>
+      </div>
+    </main>
+    
+  </div>
+</div>
