@@ -12,5 +12,5 @@ import { CartDrawerComponent } from './layout/cart-drawer/cart-drawer';
   styleUrl: './app.scss'
 })
 export class AppComponent {
-  title = 'Zuseni Essentials';
+  title = 'Sage Skincare';
 }

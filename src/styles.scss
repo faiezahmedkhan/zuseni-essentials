@@ -111,6 +111,8 @@ a {
   display: inline-block;
   text-transform: uppercase;
   font-size: 0.9rem;
+  min-width: 200px;
+  text-align: center;
 }
 
 .btn-primary:hover {
@@ -132,6 +134,8 @@ a {
   display: inline-block;
   text-transform: uppercase;
   font-size: 0.9rem;
+  min-width: 200px;
+  text-align: center;
 }
 
 .btn-outline:hover {

@@ -2,12 +2,12 @@
   
   <!-- HERO SECTION (Ruhiveda Style) -->
   <section class="hero ornate-bg">
-    <div class="hero-bg">
-      <img src="/images/zuseni_hero.jpg" alt="Zuseni Essentials Organic Skincare">
+    <div class="hero-bg" *ngFor="let img of heroImages; let i = index" [class.active]="i === currentHeroIndex">
+      <img [src]="img" alt="Sage Skincare">
       <div class="hero-overlay"></div>
     </div>
     <div class="hero-content text-center">
-      <h1 class="script-font fade-in-up">Zuseni Essentials</h1>
+      <h1 class="script-font fade-in-up">Sage Skincare</h1>
       <p class="fade-in-up delay-1">Pure Nature. Pure Tradition. Pure Beauty.</p>
     </div>
   </section>
@@ -17,22 +17,21 @@
     <div class="container">
       <div class="about-card">
         <div class="about-img">
-          <img src="/images/organic_spa_about.jpg" alt="About Zuseni">
+          <img src="/images/organic_spa_about.jpg" alt="About Sage">
         </div>
-        <div class="about-text">
-          <h2 class="script-font">About Zuseni Essentials</h2>
-          <p>Nature is the heart of every creation. We deeply believe that the truest care comes from the earth's pure ingredients.</p>
-          <p>Our journey began with a simple vision: to harness the ancient botanical secrets from around the world, while maintaining the highest standard of quality and purity.</p>
-          <p>A blend of modern luxury and pure tradition, our formulations offer the ultimate botanical remedy for radiant wellness every day.</p>
+        <div class="about-text fade-in-up delay-1">
+          <h2 class="script-font">About Sage Skincare</h2>
+          <p>We believe that true beauty stems from the earth. Our carefully curated botanical ingredients are ethically sourced to provide your skin with unparalleled nourishment and a radiant, natural glow.</p>
+          <a routerLink="/about" class="btn-primary">Our Story</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- THE ZUSENI RITUAL -->
+  <!-- THE Sage RITUAL -->
   <section class="ritual-section container">
     <div class="text-center" style="margin-bottom: 50px;">
-      <h2 class="script-font">The Zuseni Ritual</h2>
+      <h2 class="script-font">The Sage Ritual</h2>
       <p style="color: var(--text-muted); font-size: 1.1rem;">Three steps to radiant, botanical beauty.</p>
     </div>
     <div class="ritual-grid">
@@ -135,6 +134,19 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- CLINICAL EFFICACY SECTION -->
+  <section class="clinical-results-section">
+    <div class="clinical-bg">
+      <img src="/images/sage_clinical_results.jpg" alt="Clinical Results">
+    </div>
+    <div class="clinical-overlay"></div>
+    <div class="clinical-content container text-center fade-in-up">
+      <h2 class="script-font">Proven Clinical Results</h2>
+      <p>Experience the medical-grade difference. Our flawless formulations are designed by dermatologists to deliver radiant, perfectly clear skin.</p>
+      <a routerLink="/shop" class="btn-primary">View Treatments</a>
     </div>
   </section>
 

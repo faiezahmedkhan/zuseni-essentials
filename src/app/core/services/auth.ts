@@ -15,7 +15,7 @@ export class AuthService {
 
   login(email: string, pass: string) {
     // Mock login
-    this.userSignal.set({ name: 'Zuseni Customer', email });
+    this.userSignal.set({ name: 'Sage Customer', email });
   }
 
   register(name: string, email: string, pass: string) {

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ProductService } from '../../core/services/product.service';
@@ -12,9 +12,29 @@ import { CartService } from '../../core/services/cart.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit, OnDestroy {
   productService = inject(ProductService);
   cartService = inject(CartService);
+
+  heroImages = [
+    '/images/sage_hero.jpg',
+    '/images/organic_spa_about.jpg',
+    '/images/sage_clinical_results.jpg'
+  ];
+  currentHeroIndex = 0;
+  heroInterval: any;
+
+  ngOnInit() {
+    this.heroInterval = setInterval(() => {
+      this.currentHeroIndex = (this.currentHeroIndex + 1) % this.heroImages.length;
+    }, 5000);
+  }
+
+  ngOnDestroy() {
+    if (this.heroInterval) {
+      clearInterval(this.heroInterval);
+    }
+  }
 
   bestsellers = this.productService.getAllProducts().slice(0, 3);
 
@@ -69,7 +89,7 @@ export class HomeComponent {
   }
 
   testimonials = [
-    { quote: "Zuseni's Aura Serum completely transformed my skin texture in just two weeks. It feels like absolute luxury in a bottle.", author: "Sarah M." },
+    { quote: "Sage's Aura Serum completely transformed my skin texture in just two weeks. It feels like absolute luxury in a bottle.", author: "Sarah M." },
     { quote: "I love that everything is 100% organic. The Lumina cream absorbs beautifully and leaves my skin glowing all day.", author: "Elena R." },
     { quote: "The best botanical skincare I have ever used. My skin has never felt so hydrated and nourished.", author: "Jessica T." }
   ];
