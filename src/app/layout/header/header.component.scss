@@ -35,6 +35,12 @@ header.scrolled svg {
   stroke: var(--brown-deep);
 }
 
+header.home-mode .logo img {
+  /* Invert dark logo to white, and screen mode removes the black background */
+  mix-blend-mode: screen;
+  filter: grayscale(1) invert(1) brightness(2);
+}
+
 .header-topbar {
   text-align: center;
   font-size: 0.85rem;
@@ -83,10 +89,21 @@ header.scrolled svg {
 }
 
 .logo a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
   font-family: var(--font-script);
-  font-size: 3rem;
+  font-size: 2.8rem;
   color: inherit;
   line-height: 1;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+  mix-blend-mode: multiply;
+  transition: filter 0.3s ease;
 }
 
 .nav-right {
@@ -189,8 +206,13 @@ header svg {
   }
   
   .logo a {
-    font-size: 1.8rem; /* Scaled down slightly to fit between hamburger and icons */
-    display: inline-block;
+    display: inline-flex;
+    font-size: 2rem;
+    gap: 10px;
+  }
+  
+  .logo img {
+    height: 35px; /* Slightly smaller on mobile */
   }
   
   .mobile-menu-btn {
@@ -255,8 +277,18 @@ header svg {
   
   .mobile-menu-logo {
     margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
     font-size: 2.5rem;
     color: var(--brown-deep);
+  }
+  
+  .mobile-menu-logo img {
+    height: 50px;
+    width: auto;
+    mix-blend-mode: multiply;
   }
   
   .nav-left.menu-open {

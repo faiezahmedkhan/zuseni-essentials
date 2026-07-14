@@ -67,6 +67,18 @@ export class ProductService {
       benefits: ['Unclogs pores', 'Gently exfoliates', 'Balances oily skin'],
       directions: 'Massage a dime-sized amount onto damp skin. Rinse with warm water and pat dry.'
     },
+{
+  id: 'p7', // Make sure this is unique
+  name: 'Organic hair oil',
+  category: 'Hair oil', // Must match an existing category
+  price: 35.00,
+  image: '/images/organic_serum.jpg',
+  shortDescription: 'A brief 1-sentence description.',
+  fullDescription: 'A longer, detailed description about what the product does.',
+  ingredients: ['Ingredient 1', 'Ingredient 2', 'Ingredient 3'],
+  benefits: ['Benefit 1', 'Benefit 2', 'Benefit 3'],
+  directions: 'How to use this product.'
+},
     {
       id: 'p5',
       name: 'Pure Lavender Essential Oil',

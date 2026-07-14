@@ -30,7 +30,18 @@
   gap: 80px;
 }
 
-.footer-links {
+.footer-links h4 {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: var(--white);
+  font-weight: 500;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 15px;

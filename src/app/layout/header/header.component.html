@@ -15,15 +15,19 @@
       </button>
       <!-- Logo inside the mobile menu -->
       <div class="mobile-menu-logo" *ngIf="isMobileMenuOpen">
+        <img src="/images/zuseni_logo.jpg" alt="Logo Mark">
         <span class="script-font">Zuseni Essentials</span>
       </div>
       <a routerLink="/shop" class="nav-link" (click)="closeMobileMenu()">Shop</a>
-      <a routerLink="/" class="nav-link" (click)="closeMobileMenu()">About Us</a>
+      <a routerLink="/about" class="nav-link" (click)="closeMobileMenu()">About Us</a>
       <a routerLink="/" class="nav-link" (click)="closeMobileMenu()">Journal</a>
     </nav>
     
     <div class="logo">
-      <a routerLink="/">Zuseni Essentials</a>
+      <a routerLink="/">
+        <img src="/images/zuseni_logo.jpg" alt="Logo Mark">
+        <span class="script-font">Zuseni Essentials</span>
+      </a>
     </div>
     
     <div class="nav-right">
